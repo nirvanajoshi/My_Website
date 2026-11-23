@@ -8,8 +8,9 @@
   <!-- SEO: description, social preview and favicon -->
   <meta name="description" content="Cisco Packet Tracer networking labs and Python/Django projects by Damodar Joshi, with downloadable PDF write-ups for each lab.">
   <meta name="author" content="Damodar Joshi">
-  <meta name="theme-color" content="#0a0b0d">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0b0d" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f8fb" media="(prefers-color-scheme: light)">
+  <meta name="color-scheme" content="dark light">
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 
   <meta property="og:type" content="website">
@@ -17,6 +18,20 @@
   <meta property="og:title" content="Projects — Damodar Joshi">
   <meta property="og:description" content="Cisco Packet Tracer networking labs and Python/Django projects by Damodar Joshi, with downloadable PDF write-ups for each lab.">
   <!-- TODO: add og:image (1200x630) and og:url once the site has a permanent URL -->
+
+  <!-- Theme: runs before first paint so there is no dark/light flash -->
+  <script>
+    (function () {
+      var root = document.documentElement, theme = "dark";
+      try {
+        var saved = localStorage.getItem("theme");
+        if (saved === "light" || saved === "dark") theme = saved;
+        else if (window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches) theme = "light";
+      } catch (e) {}
+      root.setAttribute("data-theme", theme);
+      root.style.colorScheme = theme;
+    })();
+  </script>
 
   <!-- Font: JetBrains Mono gives the whole site its terminal look -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,6 +51,12 @@
         <span class="logo-mark" aria-hidden="true">&lt;/&gt;</span>
         <span class="logo-text" data-cli-name>Damodar</span>
       </a>
+
+      <!-- Theme switch: light / dark -->
+      <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
 
       <!-- Hamburger toggle: only visible below 768px -->
       <button class="nav-toggle" type="button"
@@ -333,7 +354,7 @@
   </footer>
 
   <!-- Lucide icons (CDN) must load before main.js calls lucide.createIcons() -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="https://unpkg.com/lucide@1.78.0/dist/umd/lucide.min.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

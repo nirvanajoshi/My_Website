@@ -5,6 +5,10 @@ node_modules/
 npm-debug.log*
 yarn-error.log*
 
+# Editor / tool folders
+.freebuff/
+.vscode/
+
 # OS cruft
 .DS_Store
 Thumbs.db
